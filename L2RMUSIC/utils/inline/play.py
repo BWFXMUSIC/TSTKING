@@ -22,7 +22,7 @@ def stream_markup_timer(_, chat_id, played, dur):
     played_sec, duration_sec = time_to_seconds(played), time_to_seconds(dur)
     percentage = (played_sec / duration_sec) * 100 if duration_sec else 0
     umm = math.floor(percentage)
-    progress_bar = ["❤️—————————", "—🥺‎————————", "——⚚‎———————", "———⚚‎——————", "————⚚‎—————", "—————⚚‎————", "——————⚚‎———", "———————⚚‎——", "————————⚚‎—", "—————————⚚‎"]
+    progress_bar = ["◉—————————", "—◉‎————————", "——◉———————", "———◉‎——————", "————◉—————", "—————◉————", "——————◉———", "———————◉——", "————————◉—", "—————————◉"]
     bar = progress_bar[min(umm // 10, 9)]
     
     return [
@@ -37,8 +37,8 @@ def stream_markup_timer(_, chat_id, played, dur):
             InlineKeyboardButton(text=f"{played} {bar} {dur}", callback_data="GetTimer")
         ],
         [
-            InlineKeyboardButton(text="❤️‍🔥 ᴏᴡɴᴇʀ ❤️‍🔥", url=f"tg://openmessage?user_id={OWNER_ID}"),
-            InlineKeyboardButton(text="🪫 sᴜᴩᴩᴏʀᴛ 🪫", url=SUPPORT_CHAT)
+            InlineKeyboardButton(text="", url=f"tg://openmessage?user_id={OWNER_ID}"),
+            InlineKeyboardButton(text="", url=SUPPORT_CHAT)
         ],
         [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
     ]
@@ -53,8 +53,8 @@ def stream_markup(_, chat_id):
             InlineKeyboardButton(text="♦️", callback_data=f"ADMIN Stop|{chat_id}")
         ],
         [
-            InlineKeyboardButton(text="❤️‍🔥 ᴏᴡɴᴇʀ ❤️‍🔥", url=f"tg://openmessage?user_id={OWNER_ID}"),
-            InlineKeyboardButton(text="🪫 sᴜᴩᴩᴏʀᴛ 🪫", url=SUPPORT_CHAT)
+            InlineKeyboardButton(text="", url=f"tg://openmessage?user_id={OWNER_ID}"),
+            InlineKeyboardButton(text="", url=SUPPORT_CHAT)
         ],
         [InlineKeyboardButton(text=_["CLOSE_BUTTON"], callback_data="close")],
     ]
