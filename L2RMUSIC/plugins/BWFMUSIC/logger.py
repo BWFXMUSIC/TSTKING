@@ -1,10 +1,9 @@
-
-
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
-from L2RMUSIC import app
+from VenomX import app
 from config import LOGGER_ID
 
+# Handle new chat members joining
 @app.on_message(filters.new_chat_members, group=2)
 async def join_watcher(_, message):    
     chat = message.chat
@@ -20,29 +19,26 @@ async def join_watcher(_, message):
             count = await app.get_chat_members_count(chat.id)
             msg = (
                 f"🍃 ʙᴏᴛ ᴀᴅᴅᴇᴅ ɪɴ ᴀ #ɴᴇᴡ_ɢʀᴏᴜᴘ \n\n"
-                
                 f"🌷 ɢʀᴏᴜᴘ ɴᴀᴍᴇ ➥ {message.chat.title}\n"
-                
                 f"🦋 ɢʀᴏᴜᴘ ɪᴅ ➥ {message.chat.id}\n"
-                
                 f"👻 ɢʀᴏᴜᴘ ᴜsᴇʀɴᴀᴍᴇ ➥ @{message.chat.username}\n"
-                
                 f"❣️ ɢʀᴏᴜᴘ ʟɪɴᴋ ➥ {link}\n"
-                
                 f"🍒 ɢʀᴏᴜᴘ ᴍᴇᴍʙᴇʀs ➥ {count}\n\n"
-                
-                f"🍷 ᴀᴅᴅᴇᴅ ʙʏ ➥ {message.from_user.mention}"
-
+                f"🍷 ᴀᴅᴅᴇᴅ ʙʏ ➥ {message.from_user.mention}\n"
                 f"🪫ʙᴏᴛ ᴏᴡɴᴇʀ @L2R_KING ♦️"
             )
             await app.send_message(
                 LOGGER_ID,
                 text=msg,
                 reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton(f"⛩️𝐀ᴅᴅ ᴍᴜsɪᴄ 𝐁σт⛩️", url=f"{link}" if link != "Unable to fetch invite link (Insufficient Permissions)" else "https://t.me")]
+                    [InlineKeyboardButton(
+                        f"⛩️𝐀ᴅᴅ ᴍᴜsɪᴄ 𝐁σт⛩️", 
+                        url=f"{link}" if link != "Unable to fetch invite link (Insufficient Permissions)" else "https://t.me"
+                    )]
                 ])
             )
 
+# Handle when the bot leaves a group
 @app.on_message(filters.left_chat_member)
 async def on_left_chat_member(_, message: Message):
     if (await app.get_me()).id == message.left_chat_member.id:
@@ -55,14 +51,16 @@ async def on_left_chat_member(_, message: Message):
             f"♦️ ɢʀᴏᴜᴘ ɴᴀᴍᴇ ➥ {title}\n\n"
             f"💬 ɢʀᴏᴜᴘ ɪᴅ ➥ {chat_id}\n\n"
             f"💨 ʙᴏᴛ ʀᴇᴍᴏᴠᴇᴅ ʙʏ ➥ {remove_by}\n\n"
-            f"✨ ʙᴏᴛ ɴᴀᴍᴇ ➥ ˹ 𝐌𝗲𝗻𝘁𝗮𝗹 𝐌𝘂𝘀𝗶𝙘™ ❤️゙"
-            f"🍷 ᴀᴅᴅᴇᴅ ʙʏ ➥ {message.from_user.mention}"
+            f"✨ ʙᴏᴛ ɴᴀᴍᴇ ➥ ˹ 𝐌𝗲𝗻𝘁𝗮𝗹 𝐌𝘂𝘀𝗶𝙘™ ❤️゙\n"
             f"🪫ʙᴏᴛ ᴏᴡɴᴇʀ @L2R_KING ♦️"
         )
         await app.send_message(
             LOGGER_ID,
             text=left,
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton(f"⛩️𝐍ᴏ 𝐀ᴅᴅ ᴍᴜsɪᴄ 𝐁σт⛩️", url=f"https://t.me/{app.username}?startgroup=true")]
+                [InlineKeyboardButton(
+                    f"⛩️𝐍ᴏ 𝐀ᴅᴅ ᴍᴜsɪᴄ 𝐁σт⛩️", 
+                    url=f"https://t.me/{app.username}?startgroup=true"
+                )]
             ])
-      )
+        )
