@@ -11,7 +11,8 @@ from L2RMUSIC.utils.database import get_client, is_active_chat, is_autoend
 
 async def auto_leave():    ### ❖ ➥ 𝗕𝐖𝗙 𝗠𝗨𝗦𝗜𝗖™🇮🇳
     if config.AUTO_LEAVING_ASSISTANT:
-        while not await asyncio.sleep(900):
+        while True:  # Infinite loop, will be controlled by sleep intervals
+            await asyncio.sleep(900)  # Sleep for 15 minutes
             from L2RMUSIC.core.userbot import assistants
 
             for num in assistants:
@@ -35,17 +36,17 @@ async def auto_leave():    ### ❖ ➥ 𝗕𝐖𝗙 𝗠𝗨𝗦𝗜𝗖™🇮�
                                     try:
                                         await client.leave_chat(i.chat.id)
                                         left += 1
-                                    except:
+                                    except Exception as e:
+                                        print(f"Error leaving chat {i.chat.id}: {e}")
                                         continue
-                except:
+                except Exception as e:
+                    print(f"Error during auto_leave operation: {e}")
                     pass
 
 
-asyncio.create_task(auto_leave())
-
-
 async def auto_end():    ### ❖ ➥ 𝗕𝐖𝗙 𝗠𝗨𝗦𝗜𝗖™🇮🇳
-    while not await asyncio.sleep(5):
+    while True:  # Infinite loop for auto_end
+        await asyncio.sleep(5)  # Sleep for 5 seconds
         ender = await is_autoend()
         if not ender:
             continue
@@ -60,15 +61,26 @@ async def auto_end():    ### ❖ ➥ 𝗕𝐖𝗙 𝗠𝗨𝗦𝗜𝗖™🇮�
                 autoend[chat_id] = {}
                 try:
                     await Ashish.stop_stream(chat_id)
-                except:
+                except Exception as e:
+                    print(f"Error stopping stream in chat {chat_id}: {e}")
                     continue
                 try:
                     await app.send_message(
                         chat_id,
                         "» ʙᴏᴛ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ʟᴇғᴛ ᴠɪᴅᴇᴏᴄʜᴀᴛ ʙᴇᴄᴀᴜsᴇ ɴᴏ ᴏɴᴇ ᴡᴀs ʟɪsᴛᴇɴɪɴɢ ᴏɴ ᴠɪᴅᴇᴏᴄʜᴀᴛ.",
                     )
-                except:
-                    continue                                 ### ❖ ➥ 𝗕𝐖𝗙 𝗠𝗨𝗦𝗜𝗖™🇮🇳
+                except Exception as e:
+                    print(f"Error sending message in chat {chat_id}: {e}")
+                    continue
 
 
-asyncio.create_task(auto_end())
+# To ensure the event loop runs properly, call these tasks
+async def main():
+    await asyncio.gather(
+        auto_leave(),
+        auto_end(),
+    )
+
+# Run the event loop
+if __name__ == "__main__":
+    asyncio.run(main())
