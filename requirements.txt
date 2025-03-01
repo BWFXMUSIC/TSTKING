@@ -23,7 +23,7 @@ spotipy
 requests
 tgcrypto
 unidecode
-yt-dlp
+yt-dlp --cookies /path/to/cookies.json https://www.youtube.com/watch?v=nWbj7W_pD9U
 youtube-search
 youtube-search-python
 git+https://github.com/AsmSafone/SafoneAPI
