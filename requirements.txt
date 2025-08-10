@@ -8,7 +8,7 @@ gitpython
 hachoir
 heroku3
 httpx==0.27.2
-lyricsgenius
+lyricsgenius==3.0.0
 motor
 numpy
 pillow
