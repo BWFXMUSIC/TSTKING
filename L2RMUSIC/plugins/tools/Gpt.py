@@ -6,7 +6,7 @@ from pyrogram import filters
 
 API_URL = "https://chatgpt.apinepdev.workers.dev/?question="  # Ensure this API is working
 
-@app.on_message(filters.command(["chatgpt", "l2r", "l2rking", "gpt", "solve"], prefixes=["+", ".", "/", "-", "", "$", "#", "&"]))
+@app.on_message(filters.command(["chatgpt", "l2r", "ask", "gpt", "solve"], prefixes=["+", ".", "/", "-", "", "$", "#", "&"]))
 async def chat_gpt(bot, message):
     try:
         start_time = time.time()
@@ -27,7 +27,7 @@ async def chat_gpt(bot, message):
                 response_time = round((end_time - start_time) * 1000, 3)
 
                 return await message.reply_text(
-                    f"**🤖 ༄𝐿 2 𝙍.🖤🜲𝐊𝐈𝐍𝐆❦︎📚:**\n\n{answer}\n\n⏳ Response Time: `{response_time} ms`\n\n_Answered by https://t.me/ALL_QUIZ_TAME",
+                    f"**🤖 ChatGPT Response:**\n\n{answer}\n\n⏳ Response Time: `{response_time} ms`\n\n_Answered by https://t.me/ALL_QUIZ_TAME",
                     parse_mode=ParseMode.MARKDOWN
                 )
             else:
