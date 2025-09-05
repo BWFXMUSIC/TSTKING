@@ -9,4 +9,11 @@ RUN sed -i 's|http://deb.debian.org/debian|http://archive.debian.org/debian|g' /
     apt-get install -y --no-install-recommends ffmpeg aria2 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-    worker: bash start.sh
+ 
+COPY . /app/
+WORKDIR /app/
+
+RUN python -m pip install --no-cache-dir --upgrade pip
+RUN pip3 install --no-cache-dir --upgrade --requirement requirements.txt
+
+CMD bash start
