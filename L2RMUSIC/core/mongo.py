@@ -8,7 +8,7 @@ LOGGER(__name__).info("Connecting to your Mongo Database...")
 try:
     # Initialize the async MongoDB client
     _mongo_async_ = AsyncIOMotorClient(MONGO_DB_URI)
-    mongodb = _mongo_async_.Music  # Access the 'Music' database
+    mongodb = _mongo_async_.Yukki  # Access the 'Music' database
 
     # Check connection by pinging the database (optional, but a good practice)
     _mongo_async_.admin.command('ping')
